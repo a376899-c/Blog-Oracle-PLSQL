@@ -3,18 +3,18 @@ from tkinter import ttk, messagebox
 import oracledb
 
 
-# ============================================================
+
 # CONFIGURACIÓN DE ORACLE
-# ============================================================
+
 
 DB_USER = "TU_USUARIO"
 DB_PASSWORD = "TU_PASSWORD"
 DB_DSN = "localhost:1521/XEPDB1"
 
 
-# ============================================================
+
 # PALETA DE COLORES
-# ============================================================
+
 
 PURPLE = "#6C4AB6"
 PURPLE_DARK = "#49327A"
@@ -37,9 +37,9 @@ DANGER = "#D95363"
 WHITE = "#FFFFFF"
 
 
-# ============================================================
+
 # CONEXIÓN
-# ============================================================
+
 
 def get_conn():
     return oracledb.connect(
@@ -49,9 +49,9 @@ def get_conn():
     )
 
 
-# ============================================================
+
 # FUNCIONES AUXILIARES
-# ============================================================
+
 
 def mostrar_error(error):
     messagebox.showerror(
@@ -72,9 +72,8 @@ def confirmar(mensaje):
     )
 
 
-# ============================================================
 # FUNCIONES DE USUARIOS
-# ============================================================
+
 
 def user_insert(name, email):
     conn = get_conn()
@@ -151,9 +150,9 @@ def existe_email(email):
         conn.close()
 
 
-# ============================================================
+
 # FUNCIONES DE ARTÍCULOS
-# ============================================================
+
 
 def article_insert(user_id, title, text):
     conn = get_conn()
@@ -317,9 +316,9 @@ def article_all_ordenado(atributo, tipo):
         conn.close()
 
 
-# ============================================================
+
 # FUNCIONES DE COMENTARIOS
-# ============================================================
+
 
 def comment_insert(article_id, name, url):
     conn = get_conn()
@@ -395,9 +394,9 @@ def contar_comentarios(article_id):
         conn.close()
 
 
-# ============================================================
+
 # FUNCIONES DE TAGS
-# ============================================================
+
 
 def tag_insert(name, url):
     conn = get_conn()
@@ -458,9 +457,9 @@ def articles_by_tag(tag_name):
     finally:
         conn.close()
         
-# ============================================================
+
 # FUNCIONES DE CATEGORÍAS
-# ============================================================
+
 
 def category_insert(name, url):
     conn = get_conn()
@@ -537,9 +536,9 @@ def categories_by_article(article_id):
         conn.close()
 
 
-# ============================================================
+
 # APLICACIÓN
-# ============================================================
+
 
 class BlogApp:
 
@@ -563,9 +562,9 @@ class BlogApp:
         self.crear_estilos()
         self.crear_interfaz()
 
-    # ========================================================
+
     # ESTILOS
-    # ========================================================
+ 
 
     def crear_estilos(self):
 
@@ -739,9 +738,9 @@ class BlogApp:
             ]
         )
 
-    # ========================================================
+
     # INTERFAZ PRINCIPAL
-    # ========================================================
+   
 
     def crear_interfaz(self):
 
@@ -755,9 +754,9 @@ class BlogApp:
             expand=True
         )
 
-        # ====================================================
+   
         # MENÚ LATERAL
-        # ====================================================
+      
 
         menu = tk.Frame(
             contenedor,
@@ -874,9 +873,9 @@ class BlogApp:
             pady=(4, 0)
         )
 
-        # ====================================================
+    
         # CONTENIDO
-        # ====================================================
+     
 
         zona = tk.Frame(
             contenedor,
@@ -902,18 +901,18 @@ class BlogApp:
 
         self.mostrar_inicio()
 
-    # ========================================================
+
     # LIMPIAR
-    # ========================================================
+  
 
     def limpiar_contenido(self):
 
         for widget in self.contenido.winfo_children():
             widget.destroy()
 
-    # ========================================================
+  
     # ENCABEZADO
-    # ========================================================
+
 
     def encabezado(self, titulo, descripcion):
 
@@ -943,9 +942,9 @@ class BlogApp:
             pady=(5, 0)
         )
 
-    # ========================================================
+   
     # TARJETA DEL DASHBOARD
-    # ========================================================
+ 
 
     def tarjeta(self, parent, numero, titulo, descripcion):
 
@@ -996,9 +995,9 @@ class BlogApp:
 
         return card
 
-    # ========================================================
+
     # INICIO / DASHBOARD
-    # ========================================================
+   
 
     def mostrar_inicio(self):
 
@@ -1163,9 +1162,9 @@ class BlogApp:
 
             mostrar_error(e)
 
-    # ========================================================
+ 
     # USUARIOS
-    # ========================================================
+  
 
     def mostrar_usuarios(self):
 
@@ -1363,10 +1362,9 @@ class BlogApp:
             pady=15
         )
 
-    # ========================================================
-    # ARTÍCULOS
-    # ========================================================
 
+    # ARTÍCULOS
+    
     def mostrar_articulos(self):
 
         self.limpiar_contenido()
@@ -2299,9 +2297,9 @@ class BlogApp:
             padx=10
         )
 
-    # ========================================================
+
     # TAGS
-    # ========================================================
+   
 
     def mostrar_tags(self):
 
@@ -2716,9 +2714,9 @@ class BlogApp:
             pady=10
         )
 
-    # ========================================================
+ 
     # CATEGORÍAS
-    # ========================================================
+ 
 
     def mostrar_categorias(self):
 
@@ -3055,9 +3053,9 @@ class BlogApp:
         )
 
 
-# ============================================================
+
 # INICIAR APLICACIÓN
-# ============================================================
+
 
 if __name__ == "__main__":
 
