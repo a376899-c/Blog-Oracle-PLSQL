@@ -1,11 +1,3 @@
--- =====================================================================
--- blog_schema.sql (ADAPTADO A LA SINTAXIS DE LOS DOCUMENTOS DEL CURSO)
--- =====================================================================
-
--- =====================================================================
--- 1. TABLAS (Sin IDENTITY ni ON DELETE CASCADE)
--- =====================================================================
-
 CREATE TABLE users (
     user_id  NUMBER,
     name     VARCHAR2(100) NOT NULL,
@@ -66,9 +58,7 @@ CREATE TABLE article_categories (
     CONSTRAINT fk_ac_category FOREIGN KEY (category_id) REFERENCES categories (category_id)
 );
 
--- =====================================================================
--- 2. USUARIOS
--- =====================================================================
+
 
 CREATE OR REPLACE PROCEDURE user_insert (
     p_name  IN users.name%TYPE,
@@ -77,7 +67,7 @@ CREATE OR REPLACE PROCEDURE user_insert (
 )
 IS
 BEGIN
-    -- Se genera el ID calculando el maximo como alternativa a IDENTITY
+    
     SELECT NVL(MAX(user_id), 0) + 1 INTO p_id FROM users;
     
     INSERT INTO users (user_id, name, email) 
@@ -115,9 +105,7 @@ BEGIN
 END;
 /
 
--- =====================================================================
--- 3. ARTÍCULOS
--- =====================================================================
+
 
 CREATE OR REPLACE PROCEDURE article_insert (
     p_user_id IN articles.user_id%TYPE,
@@ -162,7 +150,7 @@ CREATE OR REPLACE PROCEDURE article_delete (
 IS
     no_articulo EXCEPTION;
 BEGIN
-    -- Borrado manual de hijos para evitar violación de llave foránea sin usar CASCADE
+ 
     DELETE FROM comments WHERE article_id = p_id;
     DELETE FROM article_tags WHERE article_id = p_id;
     DELETE FROM article_categories WHERE article_id = p_id;
@@ -242,9 +230,7 @@ BEGIN
 END;
 /
 
--- =====================================================================
--- 4. COMENTARIOS
--- =====================================================================
+
 
 CREATE OR REPLACE PROCEDURE comment_insert (
     p_article_id IN comments.article_id%TYPE,
@@ -286,9 +272,7 @@ BEGIN
 END;
 /
 
--- =====================================================================
--- 5. TAGS
--- =====================================================================
+
 
 CREATE OR REPLACE PROCEDURE tag_insert (
     p_name IN tags.name%TYPE,
@@ -336,7 +320,7 @@ CREATE OR REPLACE PROCEDURE articles_by_tag (
 IS
     opsql VARCHAR2(500);
 BEGIN
-    -- Se aprovecha concatenación dinámica simulando uso de cursores dinámicos
+ 
     opsql := 'SELECT a.article_id, a.title, a.article_date FROM articles a ' ||
              'JOIN article_tags atg ON atg.article_id = a.article_id ' ||
              'JOIN tags t ON t.tag_id = atg.tag_id ' ||
@@ -345,9 +329,7 @@ BEGIN
 END;
 /
 
--- =====================================================================
--- 6. CATEGORÍAS
--- =====================================================================
+
 
 CREATE OR REPLACE PROCEDURE category_insert (
     p_name IN categories.name%TYPE,
